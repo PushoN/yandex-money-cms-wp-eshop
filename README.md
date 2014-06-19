@@ -1,4 +1,4 @@
-yandexmoney_wp_eshop
+Module WordPress eShop for Yandex.Money
 ====================
 
-yandexmoney_wp_eshop
+Yandex.Money page https://money.yandex.ru/shop.xml?scid=7418
