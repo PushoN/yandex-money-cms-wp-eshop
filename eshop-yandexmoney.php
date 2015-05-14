@@ -1,7 +1,11 @@
 <?php
-   /*
-   Plugin Name: eShop Yandex.Money 
-   Description: Online shop with Yandex.Money support.
+	/*
+	Plugin Name: eShop Yandex.Money
+	Plugin URI: https://github.com/yandex-money/yandex-money-cms-wp-eshop
+	Description: Online shop with Yandex.Money support.
+	Version: 1.0.0
+	Author: Yandex.Money
+	Author URI: http://money.yandex.ru
    License: GPL2
    */
 
