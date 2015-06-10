@@ -104,6 +104,23 @@
 				<input type="radio" name="payment_type" id="paymentTypeMC" value="WM"<?php if (!empty($_POST['payment_type']) && $_POST['payment_type'] == 'WM'): ?> checked<?php endif; ?> />
 				<label for="paymentTypeWM"><?php _e('WebMoney', 'eshop'); ?></label>
 				<?php endif; ?>
+				
+				<?php if (get_option('eshop_pr_payment_type_ab') == 1): ?>
+				<input type="radio" name="payment_type" id="paymentTypeAB" value="AB"<?php if (!empty($_POST['payment_type']) && $_POST['payment_type'] == 'AB'): ?> checked<?php endif; ?> />
+				<label for="paymentTypeAB"><?php _e('Alfa-Click', 'eshop'); ?></label>
+				<?php endif; ?>
+				<?php if (get_option('eshop_pr_payment_type_sb') == 1): ?>
+				<input type="radio" name="payment_type" id="paymentTypeSB" value="SB"<?php if (!empty($_POST['payment_type']) && $_POST['payment_type'] == 'SB'): ?> checked<?php endif; ?> />
+				<label for="paymentTypeSB"><?php _e('Sberbank Online', 'eshop'); ?></label>
+				<?php endif; ?>
+				<?php if (get_option('eshop_pr_payment_type_ma') == 1): ?>
+				<input type="radio" name="payment_type" id="paymentTypeMA" value="MA"<?php if (!empty($_POST['payment_type']) && $_POST['payment_type'] == 'MA'): ?> checked<?php endif; ?> />
+				<label for="paymentTypeMA"><?php _e('MasterPass', 'eshop'); ?></label>
+				<?php endif; ?>
+				<?php if (get_option('eshop_pr_payment_type_pb') == 1): ?>
+				<input type="radio" name="payment_type" id="paymentTypePB" value="PB"<?php if (!empty($_POST['payment_type']) && $_POST['payment_type'] == 'PB'): ?> checked<?php endif; ?> />
+				<label for="paymentTypePB"><?php _e('Promsvyazbank', 'eshop'); ?></label>
+				<?php endif; ?>
 			<?php endif; ?>
 
 				<?php if (isset($err['payment_type'])): ?><br/><?php echo $err['payment_type']; ?><?php endif; ?>

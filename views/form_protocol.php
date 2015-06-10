@@ -3,8 +3,8 @@
 <input type="hidden" name="shopId" value="<?php echo get_option('eshop_sid'); ?>" />
 <input type="hidden" name="scid" value="<?php echo get_option('eshop_scid'); ?>" />
 <input type="hidden" name="sum" value="<?php echo $order->sum; ?>" />
-<input type="hidden" name="customerNumber" value="<?php echo $order->ID; ?>" />
-<input type="hidden" name="orderNumber" value="<?php echo $order->ID; ?>" />
+<input type="hidden" name="customerNumber" value="<?php echo $order->id; ?>" />
+<input type="hidden" name="orderNumber" value="<?php echo $order->id; ?>" />
 <input type="hidden" name="cps_email" value="<?php echo $order->email; ?>" />
 <input type="hidden" name="cps_phone" value="<?php echo $order->phone; ?>" />
 <input type="hidden" name="shopSuccessURL" value="<?php echo get_permalink(get_option('eshop_success_page')); ?>" />

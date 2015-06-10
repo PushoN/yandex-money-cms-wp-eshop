@@ -138,6 +138,19 @@ $pages = get_pages();
 					<label for="prPaymentTypeWM"><?php _e('WebMoney', 'eshop'); ?></label>
 				</td>
 			</tr>
+			<tr valign="top">
+				<th scope="row"></th>
+				<td>
+					<input type="checkbox" name="eshop_pr_payment_type_ab" id="prPaymentTypeAB" value="1"<?php if (get_option('eshop_pr_payment_type_ab') == 1): ?> checked<?php endif; ?> />
+					<label for="prPaymentTypeAB"><?php _e('Alfa-Click', 'eshop'); ?></label>
+					<input type="checkbox" name="eshop_pr_payment_type_sb" id="prPaymentTypeSB" value="1"<?php if (get_option('eshop_pr_payment_type_sb') == 1): ?> checked<?php endif; ?> />
+					<label for="prPaymentTypeSB"><?php _e('Sberbank Online', 'eshop'); ?></label>
+					<input type="checkbox" name="eshop_pr_payment_type_ma" id="prPaymentTypeMA" value="1"<?php if (get_option('eshop_pr_payment_type_ma') == 1): ?> checked<?php endif; ?> />
+					<label for="prPaymentTypeMA"><?php _e('MasterPass', 'eshop'); ?></label>
+					<input type="checkbox" name="eshop_pr_payment_type_pb" id="prPaymentTypePB" value="1"<?php if (get_option('eshop_pr_payment_type_pb') == 1): ?> checked<?php endif; ?> />
+					<label for="prPaymentTypePB"><?php _e('Promsvyazbank', 'eshop'); ?></label>
+				</td>
+			</tr>
 		</table>
 		<h3 class="title"><?php _e('Common settings', 'eshop'); ?></h3>
 		<table class="form-table">
