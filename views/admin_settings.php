@@ -1,6 +1,8 @@
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"><br /></div>
 	<h2>EShop-YandexMoney Settings</h2>
+	<p>Любое использование Вами программы означает полное и безоговорочное принятие Вами условий лицензионного договора, размещенного по адресу https://money.yandex.ru/doc.xml?id=527132 (далее – «Лицензионный договор»). Если Вы не принимаете условия Лицензионного договора в полном объёме, Вы не имеете права использовать программу в каких-либо целях.
+	</p>
 	<form method="post" action="options.php">
 <?php
 settings_fields('eshop_settings');

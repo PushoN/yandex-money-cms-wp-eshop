@@ -3,17 +3,86 @@
 	Plugin Name: eShop Yandex.Money
 	Plugin URI: https://github.com/yandex-money/yandex-money-cms-wp-eshop
 	Description: Online shop with Yandex.Money support.
-	Version: 1.1.0
+	Version: 1.2.0
 	Author: Yandex.Money
 	Author URI: http://money.yandex.ru
-   License: GPL2
+   License: https://money.yandex.ru/doc.xml?id=527132
    */
 
 if ( !function_exists( 'add_action' ) ) {
 	echo 'Can\'t call directly';
 	exit;
 }
+class yamoney_statistics {
+	public function __construct(){
+		$this->send();
+	}
 
+	private function send()
+	{
+		global $wp_version;
+		$type=get_option('eshop_type');
+		if ($type==0)	return;
+		$array = array(
+			'url' => get_option('siteurl'),
+			'cms' => 'wordpress',
+			'version' => $wp_version,
+			'ver_mod' => '1.2.0',
+			'yacms' => false,
+			'email' => get_option('admin_email'),
+			'shopid' => get_option('eshop_sid'),
+			'settings' => array(
+				'kassa' => ($type==2)?true:false,
+				'p2p'=> ($type==1)?true:false
+			)
+		);
+
+		$key_crypt = gethostbyname($_SERVER['HTTP_HOST']);
+		$array_crypt = $this->crypt_encrypt($array, $key_crypt);
+
+		$url = 'https://statcms.yamoney.ru/';
+		$curlOpt = array(
+			CURLOPT_HEADER => false,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => false,
+			CURLINFO_HEADER_OUT => true,
+			CURLOPT_POST => true,
+		);
+
+		$curlOpt[CURLOPT_HTTPHEADER] = array('Content-Type: application/x-www-form-urlencoded');
+		$curlOpt[CURLOPT_POSTFIELDS] = http_build_query(array('data' => $array_crypt));
+
+		$curl = curl_init($url);
+		curl_setopt_array($curl, $curlOpt);
+		$rbody = curl_exec($curl);
+		$errno = curl_errno($curl);
+		$error = curl_error($curl);
+		$rcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		curl_close($curl);
+	}
+	
+	private function crypt_encrypt($data, $key)
+	{
+		$key = hash('sha256', $key, true);
+		$data = serialize($data);
+		$init_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CBC);
+		$init_vect = mcrypt_create_iv($init_size, MCRYPT_RAND);
+		$str = $this->randomString(strlen($key)).$init_vect.mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $key, $data, MCRYPT_MODE_CBC, $init_vect);
+		return base64_encode($str);
+	}
+
+	private function randomString($len)
+	{
+		$str = '';
+		$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$pool_len = strlen($pool);
+		for ($i = 0; $i < $len; $i++) {
+			$str .= substr($pool, mt_rand(0, $pool_len - 1), 1);
+		}
+		return $str;
+	}
+}
 class EShopYandexMoney
 {
 	private $_version = '1.0';
@@ -32,7 +101,7 @@ class EShopYandexMoney
 	{
 		return $this->_pluginName;
 	}
-
+	
 	function install()
 	{
 		global $wpdb;
@@ -76,6 +145,7 @@ class EShopYandexMoney
 		if(is_admin()) {
 			add_action('admin_init', array($this, 'adminRegisterSettings'));
 			add_action('admin_menu', array($this, 'adminMenu'));
+			
 		}
 
 		if (!empty($_POST)) $this->checkActions();
@@ -710,8 +780,14 @@ class EShopYandexMoney
 			'eshop_settings',
 			array(&$this, 'adminSettings')
 		);
+		add_action('update_option_eshop_sid', array( $this, 'after_update_setting' ));
+		add_action('update_option_eshop_type', array( $this, 'after_update_setting' ));
 	}
-
+	
+	function after_update_setting($one){
+		new yamoney_statistics();
+	}
+	
 	function adminOrders()
 	{
 		global $wpdb;
@@ -748,7 +824,9 @@ class EShopYandexMoney
 
 		require($this->_viewsPath.'admin_orders.php');
 	}
-
+	
+	
+	
 	function adminSettings()
 	{
 		require($this->_viewsPath.'admin_settings.php');
