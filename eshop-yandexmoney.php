@@ -3,7 +3,7 @@
 	Plugin Name: eShop Yandex.Money
 	Plugin URI: https://github.com/yandex-money/yandex-money-cms-wp-eshop
 	Description: Online shop with Yandex.Money support.
-	Version: 1.2.0
+	Version: 1.3.0
 	Author: Yandex.Money
 	Author URI: http://money.yandex.ru
    License: https://money.yandex.ru/doc.xml?id=527132
@@ -27,7 +27,7 @@ class yamoney_statistics {
 			'url' => get_option('siteurl'),
 			'cms' => 'wordpress',
 			'version' => $wp_version,
-			'ver_mod' => '1.2.0',
+			'ver_mod' => '1.3.0',
 			'yacms' => false,
 			'email' => get_option('admin_email'),
 			'shopid' => get_option('eshop_sid'),
@@ -312,7 +312,7 @@ class EShopYandexMoney
 						if ($type == 1) {
 							if (!in_array($_POST['payment_type'], array('AC', 'PC'))) $err['payment_type'] = __('Wrong type', 'eshop');
 						} else {
-							if (!in_array($_POST['payment_type'], array('AC', 'PC', 'GP', 'MC', 'WM','AB','SB','MA','PB'))) $err['payment_type'] = __('Wrong type', 'eshop');
+							if (!in_array($_POST['payment_type'], array('AC', 'PC', 'GP', 'MC', 'WM','AB','SB','MA','PB','QW','QP'))) $err['payment_type'] = __('Wrong type', 'eshop');
 						}
 					}
 				}
@@ -733,6 +733,8 @@ class EShopYandexMoney
 		register_setting('eshop_settings', 'eshop_pr_payment_type_sb');
 		register_setting('eshop_settings', 'eshop_pr_payment_type_ma');
 		register_setting('eshop_settings', 'eshop_pr_payment_type_pb');
+		register_setting('eshop_settings', 'eshop_pr_payment_type_qw');
+		register_setting('eshop_settings', 'eshop_pr_payment_type_qp');
 
 		register_setting('eshop_settings', 'eshop_cart_page');
 		register_setting('eshop_settings', 'eshop_index_page');

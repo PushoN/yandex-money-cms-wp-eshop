@@ -153,6 +153,16 @@ $pages = get_pages();
 					<label for="prPaymentTypePB"><?php _e('Promsvyazbank', 'eshop'); ?></label>
 				</td>
 			</tr>
+			<tr valign="top">
+				<th scope="row"></th>
+				<td>
+					<input type="checkbox" name="eshop_pr_payment_type_qw" id="prPaymentTypeQW" value="1"<?php if (get_option('eshop_pr_payment_type_qw') == 1): ?> checked<?php endif; ?> />
+					<label for="prPaymentTypeQW"><?php _e('Payment via QIWI Wallet', 'eshop'); ?></label>
+					
+					<input type="checkbox" name="eshop_pr_payment_type_qp" id="prPaymentTypeQP" value="1"<?php if (get_option('eshop_pr_payment_type_qp') == 1): ?> checked<?php endif; ?> />
+					<label for="prPaymentTypeQP"><?php _e('Trust payment (Qppi.ru)', 'eshop'); ?></label>
+				</td>
+			</tr>
 		</table>
 		<h3 class="title"><?php _e('Common settings', 'eshop'); ?></h3>
 		<table class="form-table">

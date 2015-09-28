@@ -121,6 +121,16 @@
 				<input type="radio" name="payment_type" id="paymentTypePB" value="PB"<?php if (!empty($_POST['payment_type']) && $_POST['payment_type'] == 'PB'): ?> checked<?php endif; ?> />
 				<label for="paymentTypePB"><?php _e('Promsvyazbank', 'eshop'); ?></label>
 				<?php endif; ?>
+				
+				<?php if (get_option('eshop_pr_payment_type_qw') == 1): ?>
+				<input type="radio" name="payment_type" id="paymentTypeQW" value="QW"<?php if (!empty($_POST['payment_type']) && $_POST['payment_type'] == 'QW'): ?> checked<?php endif; ?> />
+				<label for="paymentTypeQW"><?php _e('QIWI Wallet', 'eshop'); ?></label>
+				<?php endif; ?>
+				
+				<?php if (get_option('eshop_pr_payment_type_qp') == 1): ?>
+				<input type="radio" name="payment_type" id="paymentTypeQP" value="QP"<?php if (!empty($_POST['payment_type']) && $_POST['payment_type'] == 'QP'): ?> checked<?php endif; ?> />
+				<label for="paymentTypeQP"><?php _e('Trust payment (Qppi.ru)', 'eshop'); ?></label>
+				<?php endif; ?>
 			<?php endif; ?>
 
 				<?php if (isset($err['payment_type'])): ?><br/><?php echo $err['payment_type']; ?><?php endif; ?>
